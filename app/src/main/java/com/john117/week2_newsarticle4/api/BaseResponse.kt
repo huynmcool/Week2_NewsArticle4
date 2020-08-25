@@ -1,0 +1,217 @@
+package com.john117.week2_newsarticle4.api
+
+import android.util.Log
+import io.reactivex.Single
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import com.john117.week2_newsarticle4.model.Stories
+import com.john117.week2_newsarticle4.model.StorySearch
+import com.john117.week2_newsarticle4.utils.BASE_URL
+
+class BaseReponse {
+    private val _myApi: ApiManager by lazy {
+        getHelperRestFull()!!.create(ApiManager::class.java)
+    }
+
+    companion object {
+
+        private var retrofit: Retrofit? = null
+
+        val logging = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                Log.d("API", message)
+            }
+        }).setLevel(HttpLoggingInterceptor.Level.BASIC)
+
+        var client = OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .build()
+
+        fun getHelperRestFull(): Retrofit? {
+            if (retrofit == null) {
+                retrofit = Retrofit
+                    .Builder()
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .baseUrl(BASE_URL)
+                    .client(client)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+            }
+            return retrofit
+        }
+    }
+
+    private fun <T : Any> buildRequest(call: Call<T>): Single<T> {
+        return Single.create {
+            call.enqueue(object : Callback<T> {
+                override fun onResponse(call: Call<T>, response: Response<T>) {
+                    try {
+                        it.onSuccess(response.body()!!) // !!server bat buoc tra ve co hoac rong, khong the tra ve null
+                    } catch (ex: Exception) {
+                        it.onError(ex)
+                    }
+                }
+
+                override fun onFailure(p0: Call<T>, response: Throwable) {
+                    it.onError(response)
+                }
+            })
+        }
+    }
+
+    fun getListStory(section: String?): Single<Stories> {
+        return buildRequest(_myApi.getListStory(section = section?:""))
+    }
+
+    fun getListSearchStory(strSearch: String): Single<StorySearch> {
+        return buildRequest(_myApi.getListSearch(strSearch = strSearch))
+    }
+
+    fun getListFilterStory(
+        strSearch: String,
+        beginDay: String,
+        endDate: String,
+        sort: String,
+        section: String
+    ): Single<StorySearch> {
+        if (beginDay == "" && endDate == "" && sort == ""&&section=="")
+            return buildRequest(
+                _myApi.getListSearch(strSearch = strSearch)
+            )
+        else if (beginDay != "" && endDate != "" && sort != ""&&section=="")
+            return buildRequest(
+                _myApi.getListSearch1(
+                    strSearch = strSearch,
+                    beginDate = beginDay,
+                    endDate = endDate,
+                    sort = sort
+                )
+            )
+        else if (beginDay == "" && endDate != "" && sort != ""&&section=="")
+            return buildRequest(
+                _myApi.getListSearch2(
+                    strSearch = strSearch,
+                    endDate = endDate,
+                    sort = sort
+                )
+            )
+        else if (beginDay != "" && endDate == "" && sort != ""&&section=="")
+            return buildRequest(
+                _myApi.getListSearch3(
+                    strSearch = strSearch,
+                    beginDate = beginDay,
+                    sort = sort
+                )
+            )
+        else if (beginDay != "" && endDate != "" && sort == ""&&section=="")
+            return buildRequest(
+                _myApi.getListSearch4(
+                    strSearch = strSearch,
+                    beginDate = beginDay,
+                    endDate = endDate
+                )
+            )
+        else if (beginDay == "" && endDate == "" && sort != ""&&section=="")
+            return buildRequest(
+                _myApi.getListSearch5(
+                    strSearch = strSearch,
+                    sort = sort
+                )
+            )
+        else if (beginDay == "" && endDate != "" && sort == ""&&section=="")
+            return buildRequest(
+                _myApi.getListSearch6(
+                    strSearch = strSearch,
+                    endDate = endDate
+                )
+            )
+        else if (beginDay != "" && endDate == "" && sort == ""&&section=="")
+            return buildRequest(
+                _myApi.getListSearch7(
+                    strSearch = strSearch,
+                    beginDate = beginDay
+                )
+            )
+        else if (beginDay == "" && endDate == "" && sort == ""&& section!="")
+            return buildRequest(
+                _myApi.getListSearch8(
+                    strSearch = strSearch,
+                    strSection = section
+                )
+            )
+        else if (beginDay != "" && endDate != "" && sort != ""&& section!="")
+            return buildRequest(
+                _myApi.getListSearch9(
+                    strSearch = strSearch,
+                    beginDate = beginDay,
+                    endDate = endDate,
+                    sort = sort,
+                    strSection = section
+                )
+            )
+        else if (beginDay == "" && endDate != "" && sort != ""&& section!="")
+            return buildRequest(
+                _myApi.getListSearch10(
+                    strSearch = strSearch,
+                    endDate = endDate,
+                    sort = sort,
+                    strSection = section
+                )
+            )
+        else if (beginDay != "" && endDate == "" && sort != ""&& section!="")
+            return buildRequest(
+                _myApi.getListSearch11(
+                    strSearch = strSearch,
+                    beginDate = beginDay,
+                    sort = sort,
+                    strSection = section
+                )
+            )
+        else if (beginDay != "" && endDate != "" && sort == ""&& section!="")
+            return buildRequest(
+                _myApi.getListSearch12(
+                    strSearch = strSearch,
+                    beginDate = beginDay,
+                    endDate = endDate,
+                    strSection = section
+                )
+            )
+        else if (beginDay == "" && endDate == "" && sort != ""&& section!="")
+            return buildRequest(
+                _myApi.getListSearch13(
+                    strSearch = strSearch,
+                    sort = sort,
+                    strSection = section
+                )
+            )
+        else if (beginDay == "" && endDate != "" && sort == ""&& section!="")
+            return buildRequest(
+                _myApi.getListSearch14(
+                    strSearch = strSearch,
+                    endDate = endDate,
+                    strSection = section
+                )
+            )
+        else if (beginDay != "" && endDate == "" && sort == ""&& section!="")
+            return buildRequest(
+                _myApi.getListSearch15(
+                    strSearch = strSearch,
+                    beginDate = beginDay,
+                    strSection = section
+                )
+            )
+
+
+        else {
+            return buildRequest(
+                _myApi.getListSearch(strSearch = strSearch)
+            )
+        }
+    }
+}

@@ -1,0 +1,66 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#000</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">#371A6B</item>
+    </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/bg_launcher</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+
+    <style name="MyEdtStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlActivated">#673AB7</item>
+    </style>
+
+    <style name="text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/txtNormalSize</item>
+        <item name="android:textColor">@color/colorTxtNormal</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="buttonText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/txtNormalSize</item>
+        <item name="android:textColor">@color/colorBtn</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="title_text" parent="text">
+        <item name="android:textColor">@color/colorTxtTitle</item>
+        <item name="android:textSize">@dimen/txtTileSize</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="description_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/txtNormalSize</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="progressBar">
+        <item name="colorAccent">@color/colorBtn</item> <!-- Whatever color you want-->
+    </style>
+
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+<!--        <item name="colorAccent">@color/colorAccent</item>-->
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/colorTxt</item>
+        <!-- Used for the background -->
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+
+</resources>
