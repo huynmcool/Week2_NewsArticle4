@@ -28,9 +28,10 @@ This week we will be building a news article searching application powered by th
 The following user stories must be completed:
 
 * User can enter a search query that will display a grid of news articles using the thumbnail and headline from the New York Times Search API. (3 points)
-
+![Alt Text](https://media.giphy.com/media/U4FcvrR2cmughXOADN/giphy.gif)
+![Alt Text](https://media.giphy.com/media/ZEHnHJZu85Qt3LO7t4/giphy.gif)
 * User can click on "filter" icon which allows selection of advanced search options to filter articles. (3 points)
-
+![Alt Text](https://media.giphy.com/media/SXfW2bTYJby54bmOkc/giphy.gif)
 * An example of a query with filters (begin_date, sort, and news_desk) applied can be found here. Full details of the API can be found on this article search README.
 
 * User can configure advanced search filters such as: (points included above)
@@ -41,7 +42,9 @@ The following user stories must be completed:
 * Subsequent searches will have any filters applied to the search results. (1 point)
 * User can tap on any article in results to view the contents in an embedded browser. (2 points)
 * User can scroll down "infinitely" to continue loading more news articles. The maximum number of articles is limited by the API search. (1 point)
+
 # The following advanced user stories are optional but recommended:
+
 * Robust error handling, check if internet is available, handle error cases, network failures. (1 point)
 * Use the ActionBar SearchView or custom layout as the query box instead of an EditText. (1 point)
 * User can share a link to their friends or email it to themselves. (1 point)
